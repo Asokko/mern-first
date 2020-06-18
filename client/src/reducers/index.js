@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux'
 import product from './product'
-import card from './card'
+import cart from './cart'
 import filter from './filter'
-export default combineReducers({product,card,filter})
+export default combineReducers({product,cart,filter})

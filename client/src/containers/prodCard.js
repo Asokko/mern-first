@@ -1,12 +1,12 @@
 import { connect } from 'react-redux'
 import {bindActionCreators} from 'redux'
-import * as cardActions from '../actions/card'
+import * as cartActions from '../actions/cart'
 import productCard from '../components/productCard'
 
-const mapStateToProps = ({card},{id}) => ({
-   addedCount:card.items.reduce((count, book)=> count +(book.id===id?1:0),0),
+const mapStateToProps = ({cart},{id}) => ({
+   addedCount:cart.items.reduce((count, book)=> count +(book.id===id?1:0),0),
   })
   const mapDispatchToProps = dispatch =>({
-    ...bindActionCreators(cardActions,dispatch),
+    ...bindActionCreators(cartActions,dispatch),
   })
   export default connect(mapStateToProps, mapDispatchToProps)(productCard);

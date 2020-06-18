@@ -8,15 +8,17 @@ const Filter = ({setFilter, filterBy, searchField, setSearchField})=> (
           onClick={setFilter.bind(this, 'all')}
         >все</Menu.Item>
         <Menu.Item
-          active={filterBy === 'krovlya'}
-          onClick={setFilter.bind(this, 'krovlya')}
+          active={filterBy === 'proflist'}
+          onClick={setFilter.bind(this, 'proflist')}
         >кровля</Menu.Item>
         <Menu.Item
           active={filterBy === 'vodostok'}
           onClick={setFilter.bind(this, 'vodostok')}
         >водосточная система</Menu.Item>
         <Menu.Item>
-          <Input placeholder="поиск..." onChange={e => setSearchField(e.target.value)} value={searchField} icon="search"></Input>
+          <Input placeholder="поиск..." 
+          onChange={e => setSearchField(e.target.value)} 
+          value={searchField} icon="search"></Input>
         </Menu.Item>
       </Menu>
     )
