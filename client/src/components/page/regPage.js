@@ -1,11 +1,11 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import { Button, Form, Grid, Header, Segment, Message } from 'semantic-ui-react'
 import {useHttp} from '../../hooks/http.hook'
 
 const RegForm = () => {
-    const {loading, request, error, clearError} = useHttp()
+    const {loading, request, error} = useHttp()
     const [form, setForm] = useState({
-      email: '', password: '', phone: ''
+      email: '', password: '', phone: '', name: ''
     })
     const changeHandler = event => {
         setForm({ ...form, [event.target.name]: event.target.value })
@@ -19,7 +19,7 @@ const RegForm = () => {
   <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
     <Grid.Column style={{ maxWidth: 450 }}>
       <Header as='h2' color='teal' textAlign='center'>
-        account registration
+        Account registration
       </Header>
       <Form size='large'>
         <Segment stacked>
@@ -39,15 +39,25 @@ const RegForm = () => {
             fluid
             icon='phone'
             iconPosition='left'
-            placeholder='phone number'
+            placeholder='Phone number'
             type='phone'
             id='phone'
             name='phone'
             onChange={changeHandler}
           />
+          <Form.Input
+            fluid
+            icon='user'
+            iconPosition='left'
+            placeholder='Name'
+            type='name'
+            id='name'
+            name='name'
+            onChange={changeHandler}
+          />
 
           <Button color='teal' fluid size='large' onClick={registerHandler} disabled={loading}>          
-            registration
+            Registration
           </Button>
         </Segment>
       </Form>

@@ -6,21 +6,22 @@ const Filter = ({setFilter, filterBy, searchField, setSearchField})=> (
         <Menu.Item
           active={filterBy === 'all'}
           onClick={setFilter.bind(this, 'all')}
-        >все</Menu.Item>
+        >Все</Menu.Item>
         <Menu.Item
           active={filterBy === 'proflist'}
           onClick={setFilter.bind(this, 'proflist')}
-        >кровля</Menu.Item>
+        >Кровля</Menu.Item>
         <Menu.Item
           active={filterBy === 'vodostok'}
           onClick={setFilter.bind(this, 'vodostok')}
-        >водосточная система</Menu.Item>
-        <Menu.Item>
-          <Input placeholder="поиск..." 
-          onChange={e => setSearchField(e.target.value)} 
-          value={searchField} icon="search"></Input>
-        </Menu.Item>
+        >Водосточная система</Menu.Item>
+       
       </Menu>
     )
 
 export default Filter
+/*<Menu.Item>
+<Input placeholder="поиск..." 
+onChange={e => setSearchField(e.target.value)} 
+value={searchField} icon="search"></Input>
+</Menu.Item>*/

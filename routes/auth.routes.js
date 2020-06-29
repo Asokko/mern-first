@@ -14,7 +14,8 @@ router.post(
     check('email', 'Некорректный email').isEmail(),
     check('password', 'Минимальная длина пароля 6 символов')
       .isLength({ min: 6 }),
-    check('phone', 'Не правильный номер' ).isMobilePhone()
+    check('phone', 'Не правильный номер' ).isMobilePhone(),
+    check('name', 'Имя должно содержать не менее 3 бувк').isLength({min: 3})
   ],
   async (req, res) => {
   try {
@@ -27,7 +28,7 @@ router.post(
       })
     }
 
-    const {email, password, phone} = req.body
+    const {email, password, phone, name} = req.body
 
     const candidate = await User.findOne({ email })
 
@@ -36,7 +37,7 @@ router.post(
     }
 
     const hashedPassword = await bcrypt.hash(password, 12)
-    const user = new User({ email, password: hashedPassword , phone})
+    const user = new User({ email, password: hashedPassword , phone, name})
 
     await user.save()
 
@@ -85,7 +86,7 @@ router.post(
       { expiresIn: '1h' }
     )
 
-    res.json({ token, userId: user.id ,userEmail: user.email, userPhone: user.phone})
+    res.json({ token, userId: user.id ,userEmail: user.email, userPhone: user.phone, userName:user.name})
 
   } catch (e) {
     res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })

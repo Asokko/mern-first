@@ -4,7 +4,7 @@ import * as cartActions from '../actions/cart'
 import productCard from '../components/productCard'
 
 const mapStateToProps = ({cart},{id}) => ({
-   addedCount:cart.items.reduce((count, book)=> count +(book.id===id?1:0),0),
+   addedCount:cart.items.reduce((count, product)=> count +(product.id===id?1:0),0),
   })
   const mapDispatchToProps = dispatch =>({
     ...bindActionCreators(cartActions,dispatch),

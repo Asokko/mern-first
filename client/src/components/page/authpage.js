@@ -15,7 +15,7 @@ const AuthForm = () => {
       const loginHandler = async () => {
         try {
           const data = await request('/api/auth/login', 'POST', {...form})
-          auth.login(data.token, data.userId, data.userEmail, data.userPhone)
+          auth.login(data.token, data.userId, data.userEmail, data.userPhone, data.userName)
         } catch (e) {}
       }
       return(

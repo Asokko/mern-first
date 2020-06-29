@@ -1,5 +1,7 @@
 const initialState = {
-    items: []
+    items: [],
+    title:[],
+    color:[]
 }
 
 export default(state=initialState, action)=> {
@@ -10,7 +12,15 @@ export default(state=initialState, action)=> {
                 items: [
                     ...state.items,
                     action.payload
-                ]
+                ],
+                title:[
+                   ...state.title,
+                   action.payload.title
+                ],
+                color:[
+                    ...state.color,
+                    action.payload.color
+                 ]
             }
         case 'REMOVE_FROM_CART':
             return{

@@ -1,34 +1,63 @@
-import React from 'react'
-import { Menu, Popup, List, Button, Image , Form, Grid, Header, Message, Segmen} from "semantic-ui-react";
+import React,{useState,useContext} from 'react'
+import { Menu, Popup, List, Button, Image , Form} from "semantic-ui-react";
+import {useHttp} from '../hooks/http.hook'
+import {AuthContext} from '../context/AuthContext'
 
-const LoginForm = () => (
-  <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
-    <Grid.Column style={{ maxWidth: 450 }}>
-      <Header as='h2' color='teal' textAlign='center'>
-        <Image src='/logo.png' /> Log-in to your account
-      </Header>
-      <Form size='large'>
+const Zakaz = ({nametitle, namecolor}) => {
+   const {userPhone,isAuthenticated,userName}=useContext(AuthContext)
+   const {loading, request, error} = useHttp()
+   const username=JSON.stringify({userName})
+   const userphone=JSON.stringify({userPhone})
+   console.log({userName})
+   const [forms, setMes] = useState({
+    name: username,namecolor:namecolor, phone: userphone,nametitle:nametitle
+  })
+  const [form, setForm] = useState({
+    name: '', phone: '',nametitle:nametitle, namecolor:namecolor
+  })
+    if(isAuthenticated){
+      
+      
+    const userHandler = async () => {
         
-          <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' />
-          <Form.Input
-            fluid
-            icon='lock'
-            iconPosition='left'
-            placeholder='Password'
-            type='password'
-          />
-
-          <Button color='teal' fluid size='large'>
-            Login
-          </Button>
-       
+      try {
+        const data = await request('/api/mailer/mailern', 'POST', {...forms})
+      } catch (e) {}
+    }
+    return(
+    <Form style={{ height: '10vh' , width:120}}>
+      <Button type='submit' onClick={userHandler}>Отправить заявку</Button>
       </Form>
-      <Message>
-     
-      </Message>
-    </Grid.Column>
-  </Grid>
-)
+      )
+    }else{
+      
+    const changeHandler = event => {
+        setForm({ ...form, [event.target.name]: event.target.value })
+      }
+      const userHandler = async () => {
+        
+        try {
+          const data = await request('/api/mailer/mailern', 'POST', {...form})
+        } catch (e) {}
+      }
+      
+      return(
+<Form style={{ height: '40vh' , width:300}}>
+    <Form.Field>
+      <label>Имя</label>
+      <input placeholder='Имя' name="name" id="name" onChange={changeHandler}/>
+    </Form.Field>
+    <Form.Field>
+      <label>Телефон</label>
+      <input placeholder='Телефон' name="phone" id="name" onChange={changeHandler}/>
+    </Form.Field>
+    <Button type='submit' onClick={userHandler}>Отправить заявку</Button>
+  </Form>
+      )
+    }
+  
+}
+  
 
 const CardComponent = ({ title, id, image, removeFromCart }) => (
   <List selection divided verticalAlign="middle">
@@ -44,21 +73,24 @@ const CardComponent = ({ title, id, image, removeFromCart }) => (
   </List>
 );
 
-const menuMain=({count, items, total})=> (
+const menuMain=({count, items, total, nametitle, namecolor})=> {
+  console.log(nametitle)
+  return(
       <Menu>
         <Menu.Menu position='right'>
           <Menu.Item
             name='signup'>
             Итого: &nbsp; <b>{total}</b> &nbsp; руб.
           </Menu.Item>
+          
       <Popup
         trigger={
           <Menu.Item name="help">
             Корзина (<b>{count}</b>)
           </Menu.Item>
         }
-        content={items.map(book => (
-          <CardComponent {...book} />
+        content={items.map(product => (
+          <CardComponent {...product} />
         ))}
         on="click"
         hideOnScroll
@@ -70,13 +102,17 @@ const menuMain=({count, items, total})=> (
           </Button>
         }
         content={
-          <LoginForm />
+          
+            <Zakaz nametitle={nametitle} namecolor={namecolor}/>
+          
       }
         on="click"
         hideOnScroll
       />
+
         </Menu.Menu>
       </Menu>
 )
+    }
 
 export default menuMain

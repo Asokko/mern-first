@@ -16,11 +16,12 @@ class App extends Component {
     const {products, isLoading}=this.props
    return(
      <Container>
-      <Menu />
+      <Menu  />
       <Filter/>
-      <Card.Group itemsPerRow={5}>
-        {!isLoading? 'загрузка': products.map((product,i)=><ProductCard key={i}{...product}/>)}
-      </Card.Group>
+        <Card.Group itemsPerRow={5}>
+          {!isLoading? 'загрузка': products.map((product,i)=>
+          <ProductCard key={i}{...product}/>)}
+        </Card.Group>
      </Container>
    )
   }

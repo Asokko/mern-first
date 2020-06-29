@@ -149,7 +149,7 @@
       "color": "RAL8017",
       "image": "https://kazan.metallprofil.ru/upload/iblock/855/Prestizh_UgolZhelobaNaruzhny_Ral8017.jpg",
       "price": 923,
-      "proflist": "proflist",
+      "vodostok": "vodostok",
       "typeismer":"м2"
     },
     {
@@ -185,7 +185,7 @@
       "color": "RAL9010",
       "image": "https://kazan.metallprofil.ru/upload/iblock/446/Prestizh_UgolZhelobaNaruzhny_Ral9010.jpg",
       "price": 923,
-      "proflist": "proflist",
+      "vodostok": "vodostok",
       "typeismer":"м2"
     },
     {
